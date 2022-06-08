@@ -1,3 +1,5 @@
+// Borrar esto
+
 import axios from "axios";
 
 const getAllCountries = async (state) => {
