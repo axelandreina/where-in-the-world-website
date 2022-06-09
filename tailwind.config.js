@@ -28,6 +28,11 @@ module.exports = {
         fontFamily: {
             "Nunito+Sans": ["Nunito", "sans-serif"],
         },
+
+        screens: {
+            'mobile': '375px',
+            'desktop': '1440px'
+        }
     },
     plugins: [],
 };

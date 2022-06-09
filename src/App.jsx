@@ -1,18 +1,18 @@
 import './App.css';
-import Header from './components/Header';
-import AllCountries from './components/AllCountries';
-import Filter from './components/Filter';
-import SearchBar from './components/SearchBar';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Home from './components/Home';
+import {CountryDetail} from './components/CountryDetail';
 
 
 function App() {
-
   return (
     <>
-      <Header/>
-      <SearchBar/>
-      <Filter />
-      <AllCountries/>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' exact element={<Home/>}></Route>
+          <Route path='/country/:name' element={<CountryDetail/>}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

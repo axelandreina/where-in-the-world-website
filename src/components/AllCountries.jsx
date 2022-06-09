@@ -29,7 +29,7 @@ const AllCountries = () => {
                 </div>
                 
             ) : (
-                <div>
+                <div className="desktop:flex desktop:flex-wrap desktop:justify-center">
                     {countries !== null
                         ? countries.map((country) => (
                         <CountryCard key={country.name} country={country} />
