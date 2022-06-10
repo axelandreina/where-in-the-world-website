@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
-// import getAllCountries from "../functions/functions";
 import CountryCard from "./CountryCard";
 import { Metronome } from "@uiball/loaders";
-import axios from "axios";
+import getAllCountries from "./../functions/getAllCountries";
 
 
 
 const AllCountries = () => {
-    const getAllCountries = async (state) => {
-        setLoading(true)
-        const getCountries = await axios.get('https://restcountries.com/v2/all')
-        state(getCountries.data)
-        setLoading(false);
-    }
-
     const [loading, setLoading] = useState(true);
     const [countries, setCountries] = useState(null);
     
     useEffect(() => {
-        getAllCountries(setCountries);
+        setLoading(true);
+        getAllCountries()
+        .then( allCountries => {
+            setCountries(allCountries);
+            setLoading(false);
+        })
+        
     }, []);
 
     return (
@@ -32,7 +30,7 @@ const AllCountries = () => {
                 <div className="desktop:flex desktop:flex-wrap desktop:justify-center">
                     {countries !== null
                         ? countries.map((country) => (
-                        <CountryCard key={country.name} country={country} />
+                            <CountryCard key={country.name} country={country} />
                         ))
                         : "No country selected"}
                 </div>
