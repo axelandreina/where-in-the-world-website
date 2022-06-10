@@ -1,29 +1,23 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import { Metronome } from "@uiball/loaders";
-import axios from "axios";
 import { CountryInfo } from './CountryInfo';
-
-
+import getCountry from "./../functions/getCountry";
 
 export function CountryDetail() {
 
     const params = useParams()
-        const [country, setCountry] = useState(null)
-        const [loading, setLoading] = useState(true);
+    const [country, setCountry] = useState(null)
+    const [loading, setLoading] = useState(true);
 
-        const getCountry = async (name, state) => {
-            setLoading(true)
-            const result = await axios.get(`https://restcountries.com/v3.1/name/${encodeURI(name)}?fullText=true`)
-            state(result.data[0])
+    useEffect(() => {
+        setLoading(true)
+        getCountry(params.name)
+        .then( country => {
+            setCountry(country);
             setLoading(false);
-        }
-
-        useEffect(() => {
-            getCountry(params.name, setCountry);
-        }, []);    
-    
-        console.log(country);
+        })
+    }, []);    
 
     return (
         <div>
