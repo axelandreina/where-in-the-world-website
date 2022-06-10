@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import { Metronome } from "@uiball/loaders";
 import axios from "axios";
+import { CountryInfo } from './CountryInfo';
+
+
 
 export function CountryDetail() {
 
@@ -11,11 +14,11 @@ export function CountryDetail() {
 
         const getCountry = async (name, state) => {
             setLoading(true)
-            const result = await axios.get(`https://restcountries.com/v3.1/name/${name}`)
+            const result = await axios.get(`https://restcountries.com/v3.1/name/${encodeURI(name)}?fullText=true`)
             state(result.data[0])
             setLoading(false);
         }
-        
+
         useEffect(() => {
             getCountry(params.name, setCountry);
         }, []);    
@@ -30,9 +33,8 @@ export function CountryDetail() {
                 </div>
                 
             ) : (
-                // Aca va el componente que voy a crear
                 <div>
-                    <img src={country.flags.png} alt="" />
+                    <CountryInfo country={country}/>
                 </div>
             )}
         </div>
