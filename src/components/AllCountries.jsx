@@ -30,7 +30,7 @@ const AllCountries = () => {
                 <div className="desktop:flex desktop:flex-wrap desktop:justify-center">
                     {countries !== null
                         ? countries.map((country) => (
-                        <CountryCard key={country.name} country={country} />
+                            <CountryCard key={country.name} country={country} />
                         ))
                         : "No country selected"}
                 </div>
